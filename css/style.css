@@ -31,17 +31,20 @@ form {
   margin: 0 10px;
 }
 
-form input {
+#texto-para-procesar {
   display: block;
   margin: 20px 0 0 0;
   border: none;
   width: 90%;
   height: 30vh;
 }
-form input::placeholder {
-  /* Most modern browsers support this now. */
+#texto-para-procesar::placeholder {
   color: #0a3871;
+  border: none;
 }
+/* #texto-para-procesar::focus {
+  border: none;
+} */
 
 span {
   display: flex;
@@ -57,15 +60,16 @@ span {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5vw;
+  /* gap: 5vw; */
 }
 
 .btn {
   font-size: 1.5rem;
-  gap: 8px;
-  width: 280px;
+  width: 80%;
+  width: fit-content(80%);
   height: 50px;
   border-radius: 24px;
+  margin: 5px;
 }
 
 .btn-primary {
@@ -112,13 +116,19 @@ footer {
   text-align: center;
 }
 
-@media screen and (min-width: 630px) {
+#textarea-resultado {
+  margin: 10px;
+  width: 90%;
+  height: 80%;
+  background-color: transparent;
+  border: none;
+}
 
+@media screen and (min-width: 630px) {
   .contenedor-botones {
     flex-direction: row;
   }
 }
-
 
 @media screen and (min-width: 768px) {
   main {
@@ -131,7 +141,7 @@ footer {
     margin-left: 12vw;
   }
 
-  form input {
+  #texto-para-procesar {
     margin: 20px 0 0 0;
     width: 90%;
     height: 60vh;
