@@ -42,9 +42,26 @@ let parrafoEnResultado = document.querySelector(".contenedor-resultado p")
 let textareaResultado = document.getElementById("textarea-resultado")
 let botonCopiar = document.getElementById("btn-copy")
 
+let patron = new RegExp(/^[a-z ,.;:'"]+$/);
+
+function validarCaracteres(string) {
+    // convertimos en array
+    myArray = [...string]
+
+    // verificamos y retornamos si todas las letras cumplen o no con el patron regex
+    return myArray.every((letter) => patron.test(letter))
+}
+
 function encriptar() {
     // capturamos el texto del usuario a la variable frase para comenzar con el cifrado
     let frase = textoParaProcesar.value;
+
+    // ejecutamos la validación de cada letra
+    if (validarCaracteres(frase) == false) {
+        alert('Solo letras minúsculas y sin acentos')
+        return
+    };
+
     frase = frase.replace(/e/gim, "enter");
     frase = frase.replace(/i/gim, "imes");
     frase = frase.replace(/a/gim, "ai");
@@ -68,6 +85,13 @@ function encriptar() {
 function desencriptar() {
     // capturamos el texto del usuario a la variable frase para comenzar con el cifrado
     let frase = textoParaProcesar.value;
+
+    // ejecutamos la validación de cada letra
+    if (validarCaracteres(frase) == false) {
+        alert('Solo letras minúsculas y sin acentos')
+        return
+    };
+
     frase = frase.replace(/ufat/gim, "u");
     frase = frase.replace(/ober/gim, "o");
     frase = frase.replace(/ai/gim, "a");
