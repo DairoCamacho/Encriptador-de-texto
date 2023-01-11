@@ -31,61 +31,82 @@ En la columna En Desarrollo estarán los elementos que estés desarrollando en e
 En la columna Pausado estarán los elementos que comenzaste a desarrollar, pero necesitaste parar por algún motivo.
 Por fin, en la columna Concluido estarán los elementos ya concluidos.
 */
-function encriptar() {
-    let texto = document
-        .querySelector("#texto-para-procesar")
-        .value.toLowerCase();
-    let textoProcesado = texto.replace(/a/gim, "ai");
-    textoProcesado = textoProcesado.replace(/e/gim, "enter");
-    textoProcesado = textoProcesado.replace(/i/gim, "imes");
-    textoProcesado = textoProcesado.replace(/o/gim, "ober");
-    textoProcesado = textoProcesado.replace(/u/gim, "ufat");
 
-    document.querySelector("#textarea-resultado").removeAttribute("hidden");
-    document.querySelector("#btn-copy").removeAttribute("hidden");
-    document.querySelector(".contenedor-resultado img").style.display = "none";
-    document.querySelector(".contenedor-resultado h2").style.display = "none";
-    document.querySelector(".contenedor-resultado p").style.display = "none";
-    document.querySelector("#textarea-resultado").innerHTML = textoProcesado;
+// elemento donde el usuario ingresa el texto 
+let textoParaProcesar = document.getElementById("texto-para-procesar")
+
+// elementos donde se muestra el resultado
+let imagenEnResultado = document.querySelector(".contenedor-resultado img")
+let tituloEnResultado = document.querySelector(".contenedor-resultado h2")
+let parrafoEnResultado = document.querySelector(".contenedor-resultado p")
+let textareaResultado = document.getElementById("textarea-resultado")
+let botonCopiar = document.getElementById("btn-copy")
+
+function encriptar() {
+    // capturamos el texto del usuario a la variable frase para comenzar con el cifrado
+    let frase = textoParaProcesar.value;
+    frase = frase.replace(/e/gim, "enter");
+    frase = frase.replace(/i/gim, "imes");
+    frase = frase.replace(/a/gim, "ai");
+    frase = frase.replace(/o/gim, "ober");
+    frase = frase.replace(/u/gim, "ufat");
+
+    // ocultamos la imagen, el titulo y párrafo de la sección del resultado
+    imagenEnResultado.style.display = "none";
+    tituloEnResultado.style.display = "none";
+    parrafoEnResultado.style.display = "none";
+
+    //mostramos el botón de copiar y textarea con el resultado 
+    textareaResultado.removeAttribute("hidden");
+    botonCopiar.removeAttribute("hidden");
+
+    // pasamos el texto ya procesado al elemento textarea
+    textareaResultado.innerHTML = frase;
     console.log("Texto cifrado")
 }
 
 function desencriptar() {
-    let texto = document
-        .querySelector("#texto-para-procesar")
-        .value.toLowerCase();
-    let textoProcesado = texto.replace(/ufat/gim, "u");
-    textoProcesado = textoProcesado.replace(/ober/gim, "o");
-    textoProcesado = textoProcesado.replace(/imes/gim, "i");
-    textoProcesado = textoProcesado.replace(/enter/gim, "e");
-    textoProcesado = textoProcesado.replace(/ai/gim, "a");
+    // capturamos el texto del usuario a la variable frase para comenzar con el cifrado
+    let frase = textoParaProcesar.value;
+    frase = frase.replace(/ufat/gim, "u");
+    frase = frase.replace(/ober/gim, "o");
+    frase = frase.replace(/ai/gim, "a");
+    frase = frase.replace(/imes/gim, "i");
+    frase = frase.replace(/enter/gim, "e");
 
-    document.querySelector("#textarea-resultado").removeAttribute("hidden");
-    document.querySelector("#btn-copy").removeAttribute("hidden");
-    document.querySelector(".contenedor-resultado img").style.display = "none";
-    document.querySelector(".contenedor-resultado h2").style.display = "none";
-    document.querySelector(".contenedor-resultado p").style.display = "none";
-    document.querySelector("#textarea-resultado").innerHTML = textoProcesado;
+    // ocultamos la imagen, el titulo y párrafo de la sección del resultado
+    imagenEnResultado.style.display = "none";
+    tituloEnResultado.style.display = "none";
+    parrafoEnResultado.style.display = "none";
+
+    //mostramos el botón de copiar y textarea con el resultado 
+    textareaResultado.removeAttribute("hidden");
+    botonCopiar.removeAttribute("hidden");
+
+    // pasamos el texto ya procesado al elemento textarea
+    textareaResultado.innerHTML = frase;
     console.log("Texto descifrado")
 }
 
 function copiarAlPortapapeles() {
-    let content = document.querySelector("#textarea-resultado").innerHTML;
+    // capturamos el contenido del textareaResultado en la variable content
+    let content = textareaResultado.innerHTML;
     navigator.clipboard.writeText(content)
         .then(() => {
-            console.log("Text copied to clipboard...")
+            console.log("Texto copiado al Portapapeles...")
         })
         .catch(err => {
-            console.log('Something went wrong', err);
+            console.log('Algo salió mal al copiar', err);
         })
 }
 
 function limpiar() {
-    document.querySelector("#texto-para-procesar").value = "";
+    textoParaProcesar.value = "";
     console.log("se limpió la casilla");
 }
 
 function pegar() {
-    navigator.clipboard.readText().then(
-        (clipText) => document.querySelector("#texto-para-procesar").value = clipText);
+    navigator.clipboard.readText().
+        then(clipText => textoParaProcesar.value = clipText)
+        .catch(err => console.log('Algo salió mal al pegar', err));
 }
