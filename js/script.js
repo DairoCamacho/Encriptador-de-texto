@@ -79,3 +79,13 @@ function copiarAlPortapapeles() {
             console.log('Something went wrong', err);
         })
 }
+
+function limpiar() {
+    document.querySelector("#texto-para-procesar").value = "";
+    console.log("se limpió la casilla");
+}
+
+function pegar() {
+    navigator.clipboard.readText().then(
+        (clipText) => document.querySelector("#texto-para-procesar").value = clipText);
+}
